@@ -25,6 +25,7 @@ import 'package:sidebarx/sidebarx.dart';
 
 // import '../player/ApinioPlayer.dart';
 // import '../player/TvPlayerNew.dart';
+import '../player/bit_movin_player.dart';
 import '../player/player_video.dart';
 // import '../player/vlc.dart';
 import '../widget/landscapelist1.dart';
@@ -663,7 +664,7 @@ class TVHomeState extends State<TVHome> {
           if (continueWatchingList?[index].video1080 != null &&
               continueWatchingList?[index].video320 != "") {
             // return Vlc(continueWatchingList?[index].video1080 ?? "");
-            return PlayerVideo((continueWatchingList?[index].videoType ?? 0) == 2
+            return BitMovInPlayerVideo((continueWatchingList?[index].videoType ?? 0) == 2
                 ? "Show"
                 : "Video",(continueWatchingList?[index].videoType ?? 0) == 2
                 ? (continueWatchingList?[index].showId ?? 0)
@@ -684,7 +685,7 @@ class TVHomeState extends State<TVHome> {
             /*return ApinioPlayer(
                 urlData: continueWatchingList?[index].video320 ?? "");*/
           } else {
-            return PlayerVideo((continueWatchingList?[index].videoType ?? 0) == 2
+            return BitMovInPlayerVideo((continueWatchingList?[index].videoType ?? 0) == 2
                 ? "Show"
                 : "Video",(continueWatchingList?[index].videoType ?? 0) == 2
                 ? (continueWatchingList?[index].showId ?? 0)

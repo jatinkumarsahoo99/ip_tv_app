@@ -1,4 +1,4 @@
-package com.divinetechs.dtlivetv.ip_tv_app
+package com.divinetechs.dtlivetv
 
 import io.flutter.embedding.android.FlutterActivity
 

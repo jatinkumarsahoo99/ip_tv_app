@@ -17,6 +17,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../model/subtitlemodel.dart';
 import '../pages/tvmoviedetails.dart';
 import '../pages/tvshowdetails.dart';
+import '../player/bit_movin_player.dart';
 import '../player/player_video.dart';
 import '../provider/showdetailsprovider.dart';
 import '../provider/videodetailsprovider.dart';
@@ -291,7 +292,7 @@ class Utils {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return PlayerYoutube(
+              return BitMovInPlayerVideo(
                 playType == "Trailer"
                     ? "Trailer"
                     : playType == "Download"
@@ -314,7 +315,7 @@ class Utils {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return PlayerPod(
+              return BitMovInPlayerVideo(
                 playType == "Trailer"
                     ? "Trailer"
                     : playType == "Download"
@@ -340,7 +341,7 @@ class Utils {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return PlayerYoutube(
+              return BitMovInPlayerVideo(
                 playType == "Trailer"
                     ? "Trailer"
                     : playType == "Download"
@@ -363,7 +364,7 @@ class Utils {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return PlayerVimeo(
+              return BitMovInPlayerVideo(
                 playType == "Trailer"
                     ? "Trailer"
                     : playType == "Download"
@@ -386,7 +387,7 @@ class Utils {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return PlayerVideo(
+              return BitMovInPlayerVideo(
                 playType == "Trailer"
                     ? "Trailer"
                     : playType == "Download"

@@ -16,6 +16,7 @@ import '../model/channelsectionmodel.dart';
 import '../pages/player_pod.dart';
 import '../pages/player_vimeo.dart';
 import '../pages/player_youtube.dart';
+import '../player/bit_movin_player.dart';
 import '../utils/constant.dart';
 import '../utils/strings.dart';
 
@@ -102,7 +103,7 @@ class _LandscapeListState extends State<LandscapeList> {
                 builder: (context) {
                   if ((sectionBannerList?[index].video320 ?? "")
                       .contains("youtube")) {
-                    return PlayerYoutube(
+                    return BitMovInPlayerVideo(
                       "Channel",
                       0,
                       0,
@@ -114,7 +115,7 @@ class _LandscapeListState extends State<LandscapeList> {
                       sectionBannerList?[index].thumbnail ?? "",
                     );
                   } else {
-                    return PlayerPod(
+                    return BitMovInPlayerVideo(
                       "Channel",
                       0,
                       0,
@@ -136,7 +137,7 @@ class _LandscapeListState extends State<LandscapeList> {
                 builder: (context) {
                   if ((sectionBannerList?[index].video320 ?? "")
                       .contains("youtube")) {
-                    return PlayerYoutube(
+                    return BitMovInPlayerVideo(
                       "Channel",
                       0,
                       0,
@@ -149,7 +150,7 @@ class _LandscapeListState extends State<LandscapeList> {
                     );
                   } else if ((sectionBannerList?[index].video320 ?? "")
                       .contains("vimeo")) {
-                    return PlayerVimeo(
+                    return BitMovInPlayerVideo(
                       "Channel",
                       0,
                       0,
@@ -161,7 +162,7 @@ class _LandscapeListState extends State<LandscapeList> {
                       sectionBannerList?[index].thumbnail ?? "",
                     );
                   } else {
-                    return PlayerPod(
+                    return BitMovInPlayerVideo(
                       "Channel",
                       0,
                       0,

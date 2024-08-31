@@ -68,6 +68,9 @@ dependencies:
   expandable_text: ^2.3.0
   dropdown_button2: ^2.3.9
   permission_handler: ^11.3.1
+  responsive_framework: ^1.5.1
+  bitmovin_player: ^0.10.0
+  logger: ^2.4.0
 #  pinput: ^5.0.0
 
 dev_dependencies:
@@ -86,6 +89,12 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  assets:
+    - assets/
+    - assets/images/
+    - assets/locales/en.json
+    - assets/locales/ar.json
+    - assets/locales/hi.json
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

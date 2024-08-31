@@ -20,6 +20,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sidebarx/sidebarx.dart';
 
+import '../player/bit_movin_player.dart';
 import '../widget/tvchannellist.dart';
 
 class TVChannels extends StatefulWidget {
@@ -362,7 +363,7 @@ class TVChannelsState extends State<TVChannels> {
                 builder: (context) {
                   if ((sectionBannerList?[index].link ?? "")
                       .contains("youtube")) {
-                    return PlayerYoutube(
+                    return BitMovInPlayerVideo(
                       "Channel",
                       0,
                       0,
@@ -374,7 +375,7 @@ class TVChannelsState extends State<TVChannels> {
                       sectionBannerList?[index].image ?? "",
                     );
                   } else {
-                    return PlayerPod(
+                    return BitMovInPlayerVideo(
                       "Channel",
                       0,
                       0,
@@ -396,7 +397,7 @@ class TVChannelsState extends State<TVChannels> {
                 builder: (context) {
                   if ((sectionBannerList?[index].link ?? "")
                       .contains("youtube")) {
-                    return PlayerYoutube(
+                    return BitMovInPlayerVideo(
                       "Channel",
                       0,
                       0,
@@ -409,7 +410,7 @@ class TVChannelsState extends State<TVChannels> {
                     );
                   } else if ((sectionBannerList?[index].link ?? "")
                       .contains("vimeo")) {
-                    return PlayerVimeo(
+                    return BitMovInPlayerVideo(
                       "Channel",
                       0,
                       0,
@@ -421,7 +422,7 @@ class TVChannelsState extends State<TVChannels> {
                       sectionBannerList?[index].image ?? "",
                     );
                   } else {
-                    return PlayerPod(
+                    return BitMovInPlayerVideo(
                       "Channel",
                       0,
                       0,
