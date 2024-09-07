@@ -166,7 +166,8 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void login(String mobile, String password) async {
-    prDialog ??= ProgressDialog(
+    try {
+      prDialog ??= ProgressDialog(
         context,
         isDismissible: true,
         customBody: const LinearProgressIndicator(
@@ -174,58 +175,67 @@ class _LoginScreenState extends State<LoginScreen> {
           backgroundColor: Colors.white,
         ),
       );
-    if (!(prDialog?.isShowing())!) {
-      Utils.showProgress(context, prDialog!);
-    }
-    final homeProvider = Provider.of<HomeProvider>(context, listen: false);
-    final sectionDataProvider =
-        Provider.of<SectionDataProvider>(context, listen: false);
-    final generalProvider =
-        Provider.of<GeneralProvider>(context, listen: false);
-    await generalProvider.loginWithSocial(mobile, password, "mobile", null);
-    log('checkAndNavigate loading ==>> ${generalProvider.loading}');
-
-    if (!generalProvider.loading) {
-      if (generalProvider.loginGmailModel.status == 200) {
-        log('loginGmailModel ==>> ${generalProvider.loginGmailModel.toString()}');
-        log('Login Successfull!');
-        await sharePref.save(
-            "userid", generalProvider.loginGmailModel.result?[0].id.toString());
-        await sharePref.save("username",
-            generalProvider.loginGmailModel.result?[0].name.toString() ?? "");
-        await sharePref.save("userimage",
-            generalProvider.loginGmailModel.result?[0].image.toString() ?? "");
-        await sharePref.save("useremail",
-            generalProvider.loginGmailModel.result?[0].email.toString() ?? "");
-        await sharePref.save("usermobile",
-            generalProvider.loginGmailModel.result?[0].mobile.toString() ?? "");
-        await sharePref.save("usertype",
-            generalProvider.loginGmailModel.result?[0].type.toString() ?? "");
-
-        // Set UserID for Next
-        Constant.userID =
-            generalProvider.loginGmailModel.result?[0].id.toString();
-        log('Constant userID ==>> ${Constant.userID}');
-
-        await homeProvider.setSelectedTab(0);
-        await sectionDataProvider.getSectionBanner("0", "1");
-        await sectionDataProvider.getSectionList("0", "1");
-
-        // Hide Progress Dialog
-        await (prDialog?.hide())!;
-        if (!mounted) return;
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => const Home(pageName: ""),
-          ),
-        );
-      } else {
-        // Hide Progress Dialog
-        await (prDialog?.hide())!;
-        if (!mounted) return;
-        Utils.showSnackbar(context, "Login Failed",
-            "${generalProvider.loginGmailModel.message}", false);
+      if (!(prDialog?.isShowing())!) {
+        Utils.showProgress(context, prDialog!);
       }
+      final homeProvider = Provider.of<HomeProvider>(context, listen: false);
+      final sectionDataProvider =
+      Provider.of<SectionDataProvider>(context, listen: false);
+      final generalProvider =
+      Provider.of<GeneralProvider>(context, listen: false);
+      await generalProvider.loginWithSocial(mobile, password, "mobile", null);
+      log('checkAndNavigate loading ==>> ${generalProvider.loading}');
+
+      if (!generalProvider.loading) {
+        if (generalProvider.loginGmailModel.status == 200) {
+          log('loginGmailModel ==>> ${generalProvider.loginGmailModel
+              .toString()}');
+          log('Login Successfull!');
+          await sharePref.save(
+              "userid",
+              generalProvider.loginGmailModel.result?[0].id.toString());
+          await sharePref.save("username",
+              generalProvider.loginGmailModel.result?[0].name.toString() ?? "");
+          await sharePref.save("userimage",
+              generalProvider.loginGmailModel.result?[0].image.toString() ??
+                  "");
+          await sharePref.save("useremail",
+              generalProvider.loginGmailModel.result?[0].email.toString() ??
+                  "");
+          await sharePref.save("usermobile",
+              generalProvider.loginGmailModel.result?[0].mobile.toString() ??
+                  "");
+          await sharePref.save("usertype",
+              generalProvider.loginGmailModel.result?[0].type.toString() ?? "");
+
+          // Set UserID for Next
+          Constant.userID =
+              generalProvider.loginGmailModel.result?[0].id.toString();
+          log('Constant userID ==>> ${Constant.userID}');
+
+          await homeProvider.setSelectedTab(0);
+          await sectionDataProvider.getSectionBanner("0", "1");
+          await sectionDataProvider.getSectionList("0", "1");
+
+          // Hide Progress Dialog
+          await (prDialog?.hide())!;
+          if (!mounted) return;
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => const Home(pageName: ""),
+            ),
+          );
+        } else {
+          // Hide Progress Dialog
+          await (prDialog?.hide())!;
+          if (!mounted) return;
+          Utils.showSnackbar(context, "Login Failed",
+              "${generalProvider.loginGmailModel.message}", false);
+        }
+      }
+    }catch(e){
+      // Hide Progress Dialog
+      await (prDialog?.hide())!;
     }
   }
 

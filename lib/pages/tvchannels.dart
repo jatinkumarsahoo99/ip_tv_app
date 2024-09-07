@@ -373,6 +373,7 @@ class TVChannelsState extends State<TVChannels> {
                       0,
                       "",
                       sectionBannerList?[index].image ?? "",
+                      isLive: true,
                     );
                   } else {
                     return BitMovInPlayerVideo(
@@ -385,6 +386,7 @@ class TVChannelsState extends State<TVChannels> {
                       0,
                       "",
                       sectionBannerList?[index].image ?? "",
+                      isLive: true,
                     );
                   }
                 },
@@ -407,6 +409,7 @@ class TVChannelsState extends State<TVChannels> {
                       0,
                       "",
                       sectionBannerList?[index].image ?? "",
+                      isLive: true,
                     );
                   } else if ((sectionBannerList?[index].link ?? "")
                       .contains("vimeo")) {
@@ -420,6 +423,7 @@ class TVChannelsState extends State<TVChannels> {
                       0,
                       "",
                       sectionBannerList?[index].image ?? "",
+                      isLive: true,
                     );
                   } else {
                     return BitMovInPlayerVideo(
@@ -432,6 +436,7 @@ class TVChannelsState extends State<TVChannels> {
                       0,
                       "",
                       sectionBannerList?[index].image ?? "",
+                      isLive: true,
                     );
                   }
                 },

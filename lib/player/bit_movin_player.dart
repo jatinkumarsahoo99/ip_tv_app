@@ -15,6 +15,7 @@ import 'bit_movin_events.dart';
 class BitMovInPlayerVideo extends StatefulWidget {
   final int? videoId, videoType, typeId, otherId, stopTime;
   final String? playType, videoUrl, vUploadType, videoThumb;
+  final bool? isLive;
 
   const BitMovInPlayerVideo(
     this.playType,
@@ -26,7 +27,7 @@ class BitMovInPlayerVideo extends StatefulWidget {
     this.stopTime,
     this.vUploadType,
     this.videoThumb, {
-    super.key,
+    super.key, this.isLive = false,
   });
 
   @override
@@ -206,7 +207,7 @@ class _BitMovInPlayerVideoState extends State<BitMovInPlayerVideo> {
     if (widget.videoUrl != null) {
       var sourceConfig = SourceConfig(
         url: widget.videoUrl!,
-        type: SourceType.progressive, // or SourceType.dash or SourceType.progressive based on your source
+        type: (widget.isLive == false)? SourceType.progressive:SourceType.hls, // or SourceType.dash or SourceType.progressive based on your source
       );
       _player.loadSourceConfig(sourceConfig).then((x) async {
         if (widget.stopTime != null && widget.stopTime! > 0) {
