@@ -80,6 +80,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderSide: BorderSide(color: Colors.white),
                           ),
                         ),
+                        onSubmitted: (str){
+                          FocusScope.of(context).nextFocus(); // Move focus to next field
+                        },
                       ),
                       const SizedBox(height: 16.0),
                       TextField(

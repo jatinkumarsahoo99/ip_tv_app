@@ -25,17 +25,25 @@ import 'package:ip_tv_app/provider/watchlistprovider.dart';
 import 'package:ip_tv_app/utils/color.dart';
 import 'package:ip_tv_app/utils/constant.dart';
 import 'package:ip_tv_app/utils/utils.dart';
-import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_locales/flutter_locales.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
+// import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations(
+    [
+      // DeviceOrientation.portraitUp,
+      // DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ],
+  );
   await Locales.init(['en', 'ar', 'hi']);
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack).then((_) {
     runApp(

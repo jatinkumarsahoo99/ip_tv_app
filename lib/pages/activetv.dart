@@ -1,4 +1,4 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
+// import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -27,9 +27,9 @@ class ActiveTVState extends State<ActiveTV> {
   }
 
   _getData() async {
-    strDeviceToken = await FirebaseMessaging.instance.getToken();
-    debugPrint("===>strDeviceToken $strDeviceToken");
-    await generalProvider.getTVLoginCode(strDeviceToken);
+    // strDeviceToken = await FirebaseMessaging.instance.getToken();
+    // debugPrint("===>strDeviceToken $strDeviceToken");
+    // await generalProvider.getTVLoginCode(strDeviceToken);
 
     if (!generalProvider.loading) {
       if (generalProvider.tvCodeModel.status == 200) {

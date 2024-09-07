@@ -1,7 +1,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
+// import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:sidebarx/sidebarx.dart';
 
@@ -40,14 +40,13 @@ class HomeState extends State<Home> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _getData();
     });
-    if (!kIsWeb) {
+    /*if (!kIsWeb) {
       OneSignal.shared.setNotificationOpenedHandler(_handleNotificationOpened);
-    }
+    }*/
   }
 
   // What to do when the user opens/taps on a notification
-  _handleNotificationOpened(OSNotificationOpenedResult result) async {
-    /* id, video_type, type_id, user_id */
+ /* _handleNotificationOpened(OSNotificationOpenedResult result) async {
     debugPrint(
         "setNotificationOpenedHandler additionalData ===> ${result.notification.additionalData.toString()}");
     debugPrint(
@@ -105,7 +104,7 @@ class HomeState extends State<Home> {
         typeId: int.parse(typeID),
       );
     }
-  }
+  }*/
 
   _getData() async {
     Utils.getCurrencySymbol();
