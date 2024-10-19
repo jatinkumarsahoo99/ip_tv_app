@@ -1,3 +1,4 @@
+import 'dart:convert';
 
 import 'package:ip_tv_app/model/sectionlistmodel.dart' as section;
 import 'package:ip_tv_app/model/channelsectionmodel.dart' as channel;
@@ -16,7 +17,6 @@ import '../model/channelsectionmodel.dart';
 import '../pages/player_pod.dart';
 import '../pages/player_vimeo.dart';
 import '../pages/player_youtube.dart';
-import '../player/bit_movin_player.dart';
 import '../utils/constant.dart';
 import '../utils/strings.dart';
 
@@ -33,8 +33,10 @@ class LandscapeList extends StatefulWidget {
     required this.dataFrom,
     required this.typeId,
     required SidebarXController controller,
-  })  : super(key: key);
+  })  : _controller = controller,
+        super(key: key);
 
+  final SidebarXController _controller;
 
   @override
   State<LandscapeList> createState() => _LandscapeListState();
@@ -103,7 +105,7 @@ class _LandscapeListState extends State<LandscapeList> {
                 builder: (context) {
                   if ((sectionBannerList?[index].video320 ?? "")
                       .contains("youtube")) {
-                    return BitMovInPlayerVideo(
+                    return PlayerYoutube(
                       "Channel",
                       0,
                       0,
@@ -115,7 +117,7 @@ class _LandscapeListState extends State<LandscapeList> {
                       sectionBannerList?[index].thumbnail ?? "",
                     );
                   } else {
-                    return BitMovInPlayerVideo(
+                    return PlayerPod(
                       "Channel",
                       0,
                       0,
@@ -137,7 +139,7 @@ class _LandscapeListState extends State<LandscapeList> {
                 builder: (context) {
                   if ((sectionBannerList?[index].video320 ?? "")
                       .contains("youtube")) {
-                    return BitMovInPlayerVideo(
+                    return PlayerYoutube(
                       "Channel",
                       0,
                       0,
@@ -150,7 +152,7 @@ class _LandscapeListState extends State<LandscapeList> {
                     );
                   } else if ((sectionBannerList?[index].video320 ?? "")
                       .contains("vimeo")) {
-                    return BitMovInPlayerVideo(
+                    return PlayerVimeo(
                       "Channel",
                       0,
                       0,
@@ -162,7 +164,7 @@ class _LandscapeListState extends State<LandscapeList> {
                       sectionBannerList?[index].thumbnail ?? "",
                     );
                   } else {
-                    return BitMovInPlayerVideo(
+                    return PlayerPod(
                       "Channel",
                       0,
                       0,
@@ -207,7 +209,7 @@ class _LandscapeListState extends State<LandscapeList> {
         separatorBuilder: (context, index) => const SizedBox(width: 0),
         shrinkWrap: true,
         itemBuilder: (BuildContext context, int index) {
-          // print("Data is>>>"+(dataList?[index].toString()??""));
+          // debugPrint("Data is>>>"+(dataList?[index].toString()??""));
           return FocusBase(
             focusColor: white,
             onFocus: (isFocused) {},

@@ -51,7 +51,7 @@ class SectionDataProvider extends ChangeNotifier {
   }
 
   clearProvider() {
-    log("<================ clearProvider ================>");
+    debugPrint("<================ clearProvider ================>");
     loadingBanner = false;
     loadingSection = false;
     sectionBannerModel = SectionBannerModel();

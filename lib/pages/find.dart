@@ -142,8 +142,8 @@ class FindState extends State<Find> {
                 /* Genres */
                 Consumer<FindProvider>(
                   builder: (context, findProvider, child) {
-                    log("setGenresSize  ===>  ${findProvider.setGenresSize}");
-                    log("genresModel Size  ===>  ${(findProvider.genresModel.result?.length ?? 0)}");
+                    debugPrint("setGenresSize  ===>  ${findProvider.setGenresSize}");
+                    debugPrint("genresModel Size  ===>  ${(findProvider.genresModel.result?.length ?? 0)}");
                     if (findProvider.loading) {
                       return ShimmerUtils.buildFindShimmer(context);
                     } else {
@@ -189,7 +189,7 @@ class FindState extends State<Find> {
                                   return InkWell(
                                     borderRadius: BorderRadius.circular(4),
                                     onTap: () {
-                                      log("Item Clicked! => $position");
+                                      debugPrint("Item Clicked! => $position");
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
                                           builder: (context) => SectionByType(
@@ -282,7 +282,7 @@ class FindState extends State<Find> {
                                       InkWell(
                                         borderRadius: BorderRadius.circular(4),
                                         onTap: () {
-                                          log("Item Clicked! => $position");
+                                          debugPrint("Item Clicked! => $position");
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
@@ -426,7 +426,7 @@ class FindState extends State<Find> {
                                       InkWell(
                                         borderRadius: BorderRadius.circular(4),
                                         onTap: () {
-                                          log("Item Clicked! => $position");
+                                          debugPrint("Item Clicked! => $position");
                                          /* Navigator.push(
                                             context,
                                             MaterialPageRoute(
@@ -577,7 +577,7 @@ class FindState extends State<Find> {
               alignment: Alignment.center,
               child: TextField(
                 onSubmitted: (value) async {
-                  log("value ====> $value");
+                  debugPrint("value ====> $value");
                   if (value.isNotEmpty) {
                     await Navigator.push(
                       context,

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ip_tv_app/model/sectionlistmodel.dart';
 import 'package:ip_tv_app/model/sectiontypemodel.dart' as type;
@@ -25,7 +26,6 @@ import 'package:sidebarx/sidebarx.dart';
 
 // import '../player/ApinioPlayer.dart';
 // import '../player/TvPlayerNew.dart';
-import '../player/bit_movin_player.dart';
 import '../player/player_video.dart';
 // import '../player/vlc.dart';
 import '../widget/landscapelist1.dart';
@@ -34,10 +34,11 @@ class TVHome extends StatefulWidget {
   final String? pageName;
 
   const TVHome({
-    super.key,
+    Key? key,
     required this.pageName,
     required SidebarXController controller,
-  })  : _controller = controller;
+  })  : _controller = controller,
+        super(key: key);
 
   final SidebarXController _controller;
 
@@ -556,7 +557,7 @@ class TVHomeState extends State<TVHome> {
       itemBuilder: (BuildContext context, int index) {
         if (sectionList?[index].data != null &&
             (sectionList?[index].data?.length ?? 0) > 0) {
-          print("Section : ${sectionList?[index].title.toString() ?? ""}");
+          debugPrint("Section : ${sectionList?[index].title.toString() ?? ""}");
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -596,7 +597,7 @@ class TVHomeState extends State<TVHome> {
       {required List<list.Result>? sectionList, required int index}) {
     /* video_type =>  1-video,  2-show,  3-language,  4-category */
     /* screen_layout =>  landscape, potrait, square */
-    print("Video type: ${sectionList?[index].videoType.toString() ?? ""}");
+    debugPrint("Video type: " + (sectionList?[index].videoType.toString() ?? ""));
     if (sectionList?[index].title?.toLowerCase().trim() == "popular ott") {
       return LandscapeList1(
         sectionDataList: sectionList?[index].data,
@@ -664,7 +665,7 @@ class TVHomeState extends State<TVHome> {
           if (continueWatchingList?[index].video1080 != null &&
               continueWatchingList?[index].video320 != "") {
             // return Vlc(continueWatchingList?[index].video1080 ?? "");
-            return BitMovInPlayerVideo((continueWatchingList?[index].videoType ?? 0) == 2
+            return PlayerVideo((continueWatchingList?[index].videoType ?? 0) == 2
                 ? "Show"
                 : "Video",(continueWatchingList?[index].videoType ?? 0) == 2
                 ? (continueWatchingList?[index].showId ?? 0)
@@ -685,7 +686,7 @@ class TVHomeState extends State<TVHome> {
             /*return ApinioPlayer(
                 urlData: continueWatchingList?[index].video320 ?? "");*/
           } else {
-            return BitMovInPlayerVideo((continueWatchingList?[index].videoType ?? 0) == 2
+            return PlayerVideo((continueWatchingList?[index].videoType ?? 0) == 2
                 ? "Show"
                 : "Video",(continueWatchingList?[index].videoType ?? 0) == 2
                 ? (continueWatchingList?[index].showId ?? 0)
@@ -716,7 +717,7 @@ class TVHomeState extends State<TVHome> {
         setState(() {});
       });
     }
-/*    print("Data is: " + jsonEncode(continueWatchingList?[index].toJson()));
+/*    debugPrint("Data is: " + jsonEncode(continueWatchingList?[index].toJson()));
 
      var isContinues = await Utils.openPlayer(
       context: context,

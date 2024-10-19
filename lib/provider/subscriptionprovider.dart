@@ -21,7 +21,7 @@ class SubscriptionProvider extends ChangeNotifier {
   }
 
   clearProvider() {
-    log("<================ clearSubscriptionProvider ================>");
+    debugPrint("<================ clearSubscriptionProvider ================>");
     subscriptionModel = SubscriptionModel();
   }
 }

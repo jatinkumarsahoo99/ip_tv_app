@@ -50,10 +50,10 @@ class TVShowDetailsState extends State<TVShowDetails> {
         Provider.of<ShowDetailsProvider>(context, listen: false);
     episodeProvider = Provider.of<EpisodeProvider>(context, listen: false);
     super.initState();
-    log("initState videoId ==> ${widget.videoId}");
-    log("initState upcomingType ==> ${widget.upcomingType}");
-    log("initState videoType ==> ${widget.videoType}");
-    log("initState typeId ==> ${widget.typeId}");
+    debugPrint("initState videoId ==> ${widget.videoId}");
+    debugPrint("initState upcomingType ==> ${widget.upcomingType}");
+    debugPrint("initState videoType ==> ${widget.videoType}");
+    debugPrint("initState typeId ==> ${widget.typeId}");
     _getData();
   }
 
@@ -75,8 +75,8 @@ class TVShowDetailsState extends State<TVShowDetails> {
   }
 
   Future<void> getAllEpisode(int position, List<Session>? seasonList) async {
-    log("position ====> $position");
-    log("seasonList seasonID ====> ${seasonList?[position].id}");
+    debugPrint("position ====> $position");
+    debugPrint("seasonList seasonID ====> ${seasonList?[position].id}");
     await episodeProvider.getEpisodeBySeason(
         seasonList?[position].id ?? 0, widget.videoId);
     if (episodeProvider.episodeBySeasonModel.status == 200) {
@@ -246,7 +246,7 @@ class TVShowDetailsState extends State<TVShowDetails> {
                           constraints: const BoxConstraints(minWidth: 50),
                           child: FocusBase(
                             onPressed: () async {
-                              log("isBookmark ====> ${showDetailsProvider.sectionDetailModel.result?.isBookmark ?? 0}");
+                              debugPrint("isBookmark ====> ${showDetailsProvider.sectionDetailModel.result?.isBookmark ?? 0}");
                               if (Constant.userID != null) {
                                 await showDetailsProvider.setBookMark(
                                   context,
@@ -1571,7 +1571,7 @@ class TVShowDetailsState extends State<TVShowDetails> {
             onFocus: (isFocused) {},
             focusColor: white,
             onPressed: () async {
-              log("Clicked on index ==> $index");
+              debugPrint("Clicked on index ==> $index");
               if ((relatedDataList?[index].videoType ?? 0) == 5) {
                 if ((relatedDataList?[index].upcomingType ?? 0) == 1) {
                   if (!(context.mounted)) return;
@@ -1717,12 +1717,12 @@ class TVShowDetailsState extends State<TVShowDetails> {
 
   /* ========= Open Player ========= */
   openPlayer(String playType) async {
-    log("mCurrentEpiPos ========> ${showDetailsProvider.mCurrentEpiPos}");
+    debugPrint("mCurrentEpiPos ========> ${showDetailsProvider.mCurrentEpiPos}");
 
     /* CHECK SUBSCRIPTION */
     if (playType != "Trailer") {
       bool? isPrimiumUser = await _checkSubsRentLogin();
-      log("isPrimiumUser =============> $isPrimiumUser");
+      debugPrint("isPrimiumUser =============> $isPrimiumUser");
       if (!isPrimiumUser) return;
     }
     /* CHECK SUBSCRIPTION */
@@ -1747,12 +1747,12 @@ class TVShowDetailsState extends State<TVShowDetails> {
       String? videoThumb = (episodeProvider.episodeBySeasonModel
               .result?[showDetailsProvider.mCurrentEpiPos].landscape ??
           "");
-      log("epiID ========> $epiID");
-      log("showID =======> $showID");
-      log("vType ========> $vType");
-      log("vTypeID ======> $vTypeID");
-      log("stopTime =====> $stopTime");
-      log("videoThumb ===> $videoThumb");
+      debugPrint("epiID ========> $epiID");
+      debugPrint("showID =======> $showID");
+      debugPrint("vType ========> $vType");
+      debugPrint("vTypeID ======> $vTypeID");
+      debugPrint("stopTime =====> $stopTime");
+      debugPrint("videoThumb ===> $videoThumb");
 
       String? vUrl, vUploadType;
       if (playType == "Trailer") {
@@ -1815,7 +1815,7 @@ class TVShowDetailsState extends State<TVShowDetails> {
         vStopTime: stopTime,
       );
 
-      log("isContinue ===> $isContinue");
+      debugPrint("isContinue ===> $isContinue");
       if (isContinue != null && isContinue == true) {
         await _getData();
         await getAllEpisode(showDetailsProvider.seasonPos,
@@ -1827,16 +1827,16 @@ class TVShowDetailsState extends State<TVShowDetails> {
         int? stopTime = 0;
         String? videoThumb =
             (showDetailsProvider.sectionDetailModel.result?.landscape ?? "");
-        log("stopTime =====> $stopTime");
-        log("videoThumb ===> $videoThumb");
+        debugPrint("stopTime =====> $stopTime");
+        debugPrint("videoThumb ===> $videoThumb");
         Utils.clearQualitySubtitle();
         vUploadType =
             (showDetailsProvider.sectionDetailModel.result?.trailerType ?? "");
         vUrl =
             (showDetailsProvider.sectionDetailModel.result?.trailerUrl ?? "");
 
-        log("vUploadType ===> $vUploadType");
-        log("stopTime ===> $stopTime");
+        debugPrint("vUploadType ===> $vUploadType");
+        debugPrint("stopTime ===> $stopTime");
 
         if (!mounted) return;
         if (vUrl.isEmpty || vUrl == "") {

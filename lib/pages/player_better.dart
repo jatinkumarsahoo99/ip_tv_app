@@ -154,7 +154,7 @@
 //       // debugPrint('===================== pipStop =====================');
 //     }
 //     if (event.betterPlayerEventType == BetterPlayerEventType.progress) {
-//       // log("Current subtitle line: ${_betterPlayerController.renderedSubtitle}");
+//       // debugPrint("Current subtitle line: ${_betterPlayerController.renderedSubtitle}");
 //       playerCPosition =
 //           (_betterPlayerController.videoPlayerController?.value.position)
 //                   ?.inMilliseconds ??
@@ -163,8 +163,8 @@
 //           (_betterPlayerController.videoPlayerController?.value.duration)
 //                   ?.inMilliseconds ??
 //               0;
-//       // log("playerCPosition :===> $playerCPosition");
-//       // log("videoDuration :===> $videoDuration");
+//       // debugPrint("playerCPosition :===> $playerCPosition");
+//       // debugPrint("videoDuration :===> $videoDuration");
 //     }
 //   }
 //
@@ -172,11 +172,11 @@
 //
 //   @override
 //   Widget build(BuildContext context) {
-//     log("===> ${widget.videoUrl}");
+//     debugPrint("===> ${widget.videoUrl}");
 //     return RawKeyboardListener(
 //       onKey: (key){
-//         print("Key is called");
-//         // print("Audio track is>>"+(_betterPlayerController.betterPlayerAsmsAudioTracks?.length.toString()??""));
+//         debugPrint("Key is called");
+//         // debugPrint("Audio track is>>"+(_betterPlayerController.betterPlayerAsmsAudioTracks?.length.toString()??""));
 //         _betterPlayerController.toggleControlsVisibility(true);
 //         Future.delayed(Duration(seconds: 5), () {
 //           _betterPlayerController.toggleControlsVisibility(false);
@@ -245,9 +245,9 @@
 //   Future<bool> onBackPressed() async {
 //     debugPrint("onBack isTV :===> ${Constant.isTV}");
 //     SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
-//     log("onBackPressed playerCPosition :===> $playerCPosition");
-//     log("onBackPressed videoDuration :===> $videoDuration");
-//     log("onBackPressed playType :===> ${widget.playType}");
+//     debugPrint("onBackPressed playerCPosition :===> $playerCPosition");
+//     debugPrint("onBackPressed videoDuration :===> $videoDuration");
+//     debugPrint("onBackPressed playType :===> ${widget.playType}");
 //
 //     if (widget.playType == "Video" || widget.playType == "Show") {
 //       if ((playerCPosition ?? 0) > 0 &&

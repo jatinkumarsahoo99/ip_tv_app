@@ -4,12 +4,15 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ip_tv_app/model/channelsectionmodel.dart' as list;
 import 'package:ip_tv_app/model/channelsectionmodel.dart' as banner;
 import 'package:ip_tv_app/pages/player_pod.dart';
+import 'package:ip_tv_app/pages/player_vimeo.dart';
 import 'package:ip_tv_app/shimmer/shimmerutils.dart';
 import 'package:ip_tv_app/utils/constant.dart';
 import 'package:ip_tv_app/utils/dimens.dart';
 import 'package:ip_tv_app/utils/strings.dart';
 import 'package:ip_tv_app/widget/focusbase.dart';
+import 'package:ip_tv_app/widget/landscapelist.dart';
 import 'package:ip_tv_app/widget/nodata.dart';
+import 'package:ip_tv_app/pages/player_youtube.dart';
 import 'package:ip_tv_app/provider/channelsectionprovider.dart';
 import 'package:ip_tv_app/utils/color.dart';
 import 'package:ip_tv_app/widget/mytext.dart';
@@ -20,14 +23,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sidebarx/sidebarx.dart';
 
-import '../player/bit_movin_player.dart';
 import '../widget/tvchannellist.dart';
 
 class TVChannels extends StatefulWidget {
   const TVChannels({
-    super.key,
+    Key? key,
     required SidebarXController controller,
-  })  : _controller = controller;
+  })  : _controller = controller,
+        super(key: key);
 
   final SidebarXController _controller;
 
@@ -301,8 +304,8 @@ class TVChannelsState extends State<TVChannels> {
       {required List<list.Result>? sectionList, required int index}) {
     /* video_type =>  1-video,  2-show,  3-language,  4-category */
     /* screen_layout =>  landscape, potrait, square */
-    print("Section type:${sectionList?[index].videoType.toString()}");
-    print("Sanjaya Test:${sectionList?[index].videoType.toString()}");
+    debugPrint("Section type:${sectionList?[index].videoType.toString()}");
+    debugPrint("Sanjaya Test:${sectionList?[index].videoType.toString()}");
     return TvChannelList(
       sectionDataList: sectionList?[index].data,
       sectionPos: index,
@@ -363,7 +366,7 @@ class TVChannelsState extends State<TVChannels> {
                 builder: (context) {
                   if ((sectionBannerList?[index].link ?? "")
                       .contains("youtube")) {
-                    return BitMovInPlayerVideo(
+                    return PlayerYoutube(
                       "Channel",
                       0,
                       0,
@@ -373,10 +376,9 @@ class TVChannelsState extends State<TVChannels> {
                       0,
                       "",
                       sectionBannerList?[index].image ?? "",
-                      isLive: true,
                     );
                   } else {
-                    return BitMovInPlayerVideo(
+                    return PlayerPod(
                       "Channel",
                       0,
                       0,
@@ -386,7 +388,6 @@ class TVChannelsState extends State<TVChannels> {
                       0,
                       "",
                       sectionBannerList?[index].image ?? "",
-                      isLive: true,
                     );
                   }
                 },
@@ -399,7 +400,7 @@ class TVChannelsState extends State<TVChannels> {
                 builder: (context) {
                   if ((sectionBannerList?[index].link ?? "")
                       .contains("youtube")) {
-                    return BitMovInPlayerVideo(
+                    return PlayerYoutube(
                       "Channel",
                       0,
                       0,
@@ -409,11 +410,10 @@ class TVChannelsState extends State<TVChannels> {
                       0,
                       "",
                       sectionBannerList?[index].image ?? "",
-                      isLive: true,
                     );
                   } else if ((sectionBannerList?[index].link ?? "")
                       .contains("vimeo")) {
-                    return BitMovInPlayerVideo(
+                    return PlayerVimeo(
                       "Channel",
                       0,
                       0,
@@ -423,10 +423,9 @@ class TVChannelsState extends State<TVChannels> {
                       0,
                       "",
                       sectionBannerList?[index].image ?? "",
-                      isLive: true,
                     );
                   } else {
-                    return BitMovInPlayerVideo(
+                    return PlayerPod(
                       "Channel",
                       0,
                       0,
@@ -436,7 +435,6 @@ class TVChannelsState extends State<TVChannels> {
                       0,
                       "",
                       sectionBannerList?[index].image ?? "",
-                      isLive: true,
                     );
                   }
                 },

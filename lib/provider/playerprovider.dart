@@ -47,7 +47,7 @@ class PlayerProvider extends ChangeNotifier {
   }
 
   clearProvider() {
-    log("<================ clearProvider ================>");
+    debugPrint("<================ clearProvider ================>");
     successModel = SuccessModel();
     videoViewSuccessModel = SuccessModel();
   }

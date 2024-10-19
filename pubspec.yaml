@@ -35,6 +35,8 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+  chewie:
+    path: packages/chewie/
 #  http: ^1.2.2
   shared_preferences: ^2.3.2
   google_mobile_ads: ^5.1.0
@@ -69,10 +71,14 @@ dependencies:
   dropdown_button2: ^2.3.9
   permission_handler: ^11.3.1
   responsive_framework: ^1.5.1
-  bitmovin_player: ^0.10.0
   logger: ^2.4.0
   audio_session: ^0.1.21
   volume_controller: ^2.0.8
+  pod_player: 0.2.2
+#  chewie: 1.8.5
+  youtube_player_iframe: 5.2.0
+  vimeo_video_player: ^0.0.16
+  wakelock_plus: ^1.2.8
 #  pinput: ^5.0.0
 
 dev_dependencies:

@@ -2,31 +2,37 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:math' as number;
 
+import 'package:ip_tv_app/model/subtitlemodel.dart';
+import 'package:ip_tv_app/pages/player_pod.dart';
+import 'package:ip_tv_app/pages/player_better.dart';
+import 'package:ip_tv_app/pages/player_vimeo.dart';
+import 'package:ip_tv_app/pages/player_youtube.dart';
+import 'package:ip_tv_app/pages/tvmoviedetails.dart';
+import 'package:ip_tv_app/pages/tvshowdetails.dart';
+import 'package:ip_tv_app/provider/showdetailsprovider.dart';
+import 'package:ip_tv_app/provider/videodetailsprovider.dart';
+import 'package:ip_tv_app/utils/color.dart';
+import 'package:ip_tv_app/utils/constant.dart';
+import 'package:ip_tv_app/widget/myimage.dart';
+import 'package:ip_tv_app/widget/mytext.dart';
+import 'package:ip_tv_app/utils/sharedpre.dart';
+import 'package:ip_tv_app/utils/strings.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:ip_tv_app/utils/sharedpre.dart';
-import 'package:ip_tv_app/utils/strings.dart';
 import 'package:path/path.dart' as path;
 import 'package:http/http.dart' as http;
-import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:progress_dialog_null_safe/progress_dialog_null_safe.dart';
+import 'package:html/parser.dart' show parse;
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
-import '../model/subtitlemodel.dart';
-import '../pages/tvmoviedetails.dart';
-import '../pages/tvshowdetails.dart';
-import '../player/bit_movin_player.dart';
-import '../player/player_video.dart';
-import '../provider/showdetailsprovider.dart';
-import '../provider/videodetailsprovider.dart';
-import '../widget/myimage.dart';
-import '../widget/mytext.dart';
-import 'adhelper.dart';
-import 'color.dart';
-import 'constant.dart';
 import 'package:sidebarx/sidebarx.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../player/player_video.dart';
+import 'adhelper.dart';
+
 // import '../player/vlc.dart';
 
 class Utils {
@@ -52,7 +58,6 @@ class Utils {
       return const SizedBox.shrink();
     }
   }
-
   static Future<bool> checkPremiumUser() async {
     SharedPre sharedPre = SharedPre();
     String? isPremiumBuy = await sharedPre.read("userpremium");
@@ -90,9 +95,8 @@ class Utils {
     debugPrint("isOpen ==========> $isOpen");
     // controller.setExtended(isOpen);
   }
-
   static openUrl(String url) async {
-    if (await canLaunchUrl(Uri.parse(url))) {
+    if (await canLaunchUrl(Uri.parse(url!))) {
       await launchUrl(
         Uri.parse(url),
         mode: LaunchMode.platformDefault,
@@ -157,7 +161,8 @@ class Utils {
           ),
         );
       }
-    } else {
+    }
+    else {
       if (videoType == 1) {
         if (!(context.mounted)) return;
         await Navigator.push(
@@ -221,7 +226,8 @@ class Utils {
     return isRented;
   }
 
-  static Future<void> buildWebAlertDialog(BuildContext context, String pageName, String? reqData) async {
+  static Future<void> buildWebAlertDialog(
+      BuildContext context, String pageName, String? reqData) async {
     Widget? child;
     // if (pageName == "login") {
     //   child = const LoginSocialWeb();
@@ -264,8 +270,8 @@ class Utils {
     int? vType = (videoType ?? 0);
     int? vTypeID = (typeId ?? 0);
     int? vOtherID = (otherId ?? 0);
-    log("vID ========> $vID");
-    log("vOtherID ===> $vOtherID");
+    debugPrint("vID ========> $vID");
+    debugPrint("vOtherID ===> $vOtherID");
 
     int? stopTime;
     if (playType == "startOver") {
@@ -281,8 +287,8 @@ class Utils {
       vUrl = (videoUrl ?? "");
     }
     vUploadType = (uploadType ?? "");
-    log("stopTime ===> $stopTime");
-    log("===>vUploadType $vUploadType");
+    debugPrint("stopTime ===> $stopTime");
+    debugPrint("===>vUploadType $vUploadType");
 
     if (kIsWeb) {
       /* Pod Player & Youtube Player */
@@ -292,7 +298,7 @@ class Utils {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return BitMovInPlayerVideo(
+              return PlayerYoutube(
                 playType == "Trailer"
                     ? "Trailer"
                     : playType == "Download"
@@ -310,12 +316,13 @@ class Utils {
             },
           ),
         );
-      } else {
+      }
+      else {
         isContinue = await Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) {
-              return BitMovInPlayerVideo(
+              return PlayerPod(
                 playType == "Trailer"
                     ? "Trailer"
                     : playType == "Download"
@@ -341,7 +348,7 @@ class Utils {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return BitMovInPlayerVideo(
+              return PlayerYoutube(
                 playType == "Trailer"
                     ? "Trailer"
                     : playType == "Download"
@@ -359,12 +366,13 @@ class Utils {
             },
           ),
         );
-      } else if (vUploadType == "vimeo") {
+      }
+      else if (vUploadType == "vimeo") {
         isContinue = await Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) {
-              return BitMovInPlayerVideo(
+              return PlayerVimeo(
                 playType == "Trailer"
                     ? "Trailer"
                     : playType == "Download"
@@ -382,12 +390,13 @@ class Utils {
             },
           ),
         );
-      } else {
+      }
+      else {
         isContinue = await Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) {
-              return BitMovInPlayerVideo(
+               return PlayerVideo(
                 playType == "Trailer"
                     ? "Trailer"
                     : playType == "Download"
@@ -419,7 +428,7 @@ class Utils {
         );
       }
     }
-    log("isContinue ===> $isContinue");
+    debugPrint("isContinue ===> $isContinue");
     return isContinue;
   }
 
@@ -449,7 +458,8 @@ class Utils {
     Constant.resolutionsUrls.clear();
     Constant.resolutionsUrls = <String, String>{};
     Constant.resolutionsUrls = qualityUrlList;
-    debugPrint("resolutionsUrls ==========> ${Constant.resolutionsUrls.length}");
+    debugPrint(
+        "resolutionsUrls ==========> ${Constant.resolutionsUrls.length}");
   }
 
   /* ========= Set-up Quality URL END =========== */
@@ -483,7 +493,9 @@ class Utils {
     debugPrint("subtitleUrlList========> ${subtitleUrlList.length}");
     Constant.subtitleUrls.clear();
     Constant.subtitleUrls = [];
-    Constant.subtitleUrls = subtitleUrlList.entries.map((entry) => SubTitleModel(entry.key, entry.value)).toList();
+    Constant.subtitleUrls = subtitleUrlList.entries
+        .map((entry) => SubTitleModel(entry.key, entry.value))
+        .toList();
     debugPrint("subtitleUrls ==========> ${Constant.subtitleUrls.length}");
   }
 
@@ -492,9 +504,9 @@ class Utils {
   static void getCurrencySymbol() async {
     SharedPre sharedPref = SharedPre();
     Constant.currencySymbol = await sharedPref.read("currency_code") ?? "";
-    log('Constant currencySymbol ==> ${Constant.currencySymbol}');
+    debugPrint('Constant currencySymbol ==> ${Constant.currencySymbol}');
     Constant.currency = await sharedPref.read("currency") ?? "";
-    log('Constant currency ==> ${Constant.currency}');
+    debugPrint('Constant currency ==> ${Constant.currency}');
   }
 
   static setUserId(userID) async {
@@ -510,14 +522,14 @@ class Utils {
       await sharedPref.remove("usertype");
     }
     Constant.userID = await sharedPref.read("userid");
-    log('setUserId userID ==> ${Constant.userID}');
+    debugPrint('setUserId userID ==> ${Constant.userID}');
   }
 
   static setFirstTime(value) async {
     SharedPre sharedPref = SharedPre();
     await sharedPref.save("seen", value);
     String seenValue = await sharedPref.read("seen");
-    log('setFirstTime seen ==> $seenValue');
+    debugPrint('setFirstTime seen ==> $seenValue');
   }
 
   static Future<void> deleteCacheDir() async {
@@ -554,7 +566,8 @@ class Utils {
     );
   }
 
-  static BoxDecoration setGradientBGWithCenter(Color colorStart, Color colorCenter, Color colorEnd, double radius) {
+  static BoxDecoration setGradientBGWithCenter(
+      Color colorStart, Color colorCenter, Color colorEnd, double radius) {
     return BoxDecoration(
       gradient: LinearGradient(
         begin: Alignment.centerLeft,
@@ -598,7 +611,8 @@ class Utils {
     );
   }
 
-  static BoxDecoration setBGWithBorder(Color color, Color borderColor, double radius, double border) {
+  static BoxDecoration setBGWithBorder(
+      Color color, Color borderColor, double radius, double border) {
     return BoxDecoration(
       color: color,
       border: Border.all(
@@ -651,7 +665,8 @@ class Utils {
     );
   }
 
-  static AppBar myAppBar(BuildContext context, String appBarTitle, bool multilanguage) {
+  static AppBar myAppBar(
+      BuildContext context, String appBarTitle, bool multilanguage) {
     return AppBar(
       automaticallyImplyLeading: false,
       elevation: 0,
@@ -672,7 +687,8 @@ class Utils {
     );
   }
 
-  static AppBar myAppBarWithBack(BuildContext context, String appBarTitle, bool multilanguage) {
+  static AppBar myAppBarWithBack(
+      BuildContext context, String appBarTitle, bool multilanguage) {
     return AppBar(
       elevation: 5,
       backgroundColor: appBgColor,
@@ -713,7 +729,8 @@ class Utils {
     );
   }
 
-  static void showSnackbar(BuildContext context, String showFor, String message, bool multilanguage) {
+  static void showSnackbar(BuildContext context, String showFor, String message,
+      bool multilanguage) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         duration: const Duration(seconds: 1),
@@ -740,7 +757,8 @@ class Utils {
     );
   }
 
-  static void showProgress(BuildContext context, ProgressDialog prDialog) async {
+  static void showProgress(
+      BuildContext context, ProgressDialog prDialog) async {
     debugPrint("width =======> ${MediaQuery.of(context).size.width}");
     prDialog = ProgressDialog(context);
 
@@ -752,7 +770,9 @@ class Utils {
       showLogs: false,
       customBody: Container(
         height: 80,
-        width: MediaQuery.of(context).size.width > 400 ? 300 : MediaQuery.of(context).size.width * 0.7,
+        width: MediaQuery.of(context).size.width > 400
+            ? 300
+            : MediaQuery.of(context).size.width * 0.7,
         padding: const EdgeInsets.all(8),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -797,7 +817,7 @@ class Utils {
     String convTime = "";
 
     try {
-      log("timeInMilli ==> ${(timeInMilli / 1000)}");
+      debugPrint("timeInMilli ==> ${(timeInMilli / 1000)}");
       if (timeInMilli > 0) {
         int seconds = ((timeInMilli / 1000) % 60).toInt();
         int minutes = ((timeInMilli / (1000 * 60)) % 60).toInt();
@@ -826,7 +846,7 @@ class Utils {
         convTime = "0";
       }
     } catch (e) {
-      log("ConvTimeE Exception ==> $e");
+      debugPrint("ConvTimeE Exception ==> $e");
     }
     return convTime;
   }
@@ -835,7 +855,7 @@ class Utils {
     String convTime = "";
 
     try {
-      log("timeInMilli ==> $timeInMilli");
+      debugPrint("timeInMilli ==> $timeInMilli");
       if (timeInMilli > 0) {
         double seconds = ((timeInMilli / 1000) % 60);
         double minutes = ((timeInMilli / (1000 * 60)) % 60);
@@ -843,7 +863,8 @@ class Utils {
 
         if (hours >= 1) {
           if (minutes > 0 && seconds > 0) {
-            convTime = "${hours.toInt()} hr ${minutes.toInt()} min ${seconds.toInt()} sec";
+            convTime =
+                "${hours.toInt()} hr ${minutes.toInt()} min ${seconds.toInt()} sec";
           } else if (minutes > 0 && seconds == 0) {
             convTime = "${hours.toInt()} hr ${minutes.toInt()} min";
           } else if (minutes == 0 && seconds > 0) {
@@ -864,7 +885,7 @@ class Utils {
         convTime = "0";
       }
     } catch (e) {
-      log("ConvTimeE Exception ==> $e");
+      debugPrint("ConvTimeE Exception ==> $e");
     }
     return convTime;
   }
@@ -873,7 +894,7 @@ class Utils {
     String convTime = "";
 
     try {
-      log("remainWatch ==> ${(remainWatch / 1000)}");
+      debugPrint("remainWatch ==> ${(remainWatch / 1000)}");
       if (remainWatch > 0) {
         double seconds = ((remainWatch / 1000) % 60);
         double minutes = ((remainWatch / (1000 * 60)) % 60);
@@ -881,7 +902,8 @@ class Utils {
 
         if (hours >= 1) {
           if (minutes > 0 && seconds > 0) {
-            convTime = "${hours.toInt()} hr ${minutes.toInt()} min ${seconds.toInt()} sec";
+            convTime =
+                "${hours.toInt()} hr ${minutes.toInt()} min ${seconds.toInt()} sec";
           } else if (minutes > 0 && seconds == 0) {
             convTime = "${hours.toInt()} hr ${minutes.toInt()} min";
           } else if (minutes == 0 && seconds > 0) {
@@ -902,7 +924,7 @@ class Utils {
         convTime = "0";
       }
     } catch (e) {
-      log("ConvTimeE Exception ==> $e");
+      debugPrint("ConvTimeE Exception ==> $e");
     }
     return convTime;
   }
@@ -925,7 +947,7 @@ class Utils {
         convTime = "00 min";
       }
     } catch (e) {
-      log("convertInMin Exception ==> $e");
+      debugPrint("convertInMin Exception ==> $e");
     }
     return convTime;
   }
@@ -939,7 +961,7 @@ class Utils {
         percentage = 0.0;
       }
     } catch (e) {
-      log("getPercentage Exception ==> $e");
+      debugPrint("getPercentage Exception ==> $e");
       percentage = 0.0;
     }
     percentage = (percentage.round() / 100);
@@ -947,12 +969,12 @@ class Utils {
   }
 
   //Convert Html to simple String
-  static parseHtmlString(String htmlString) {
-    // final document = parse(htmlString);
-    // final String parsedString =
-    //     parse(document.body!.text).documentElement!.text;
-    //
-    // return parsedString;
+  static String parseHtmlString(String htmlString) {
+    final document = parse(htmlString);
+    final String parsedString =
+        parse(document.body!.text).documentElement!.text;
+
+    return parsedString;
   }
 
   static Future<String> getFileUrl(String fileName) async {
@@ -969,7 +991,8 @@ class Utils {
       } else {
         documentDirectory = await getApplicationDocumentsDirectory();
       }
-      File file = File(path.join(documentDirectory?.path ?? "", '${DateTime.now().millisecondsSinceEpoch.toString()}.png'));
+      File file = File(path.join(documentDirectory?.path ?? "",
+          '${DateTime.now().millisecondsSinceEpoch.toString()}.png'));
       file.writeAsBytesSync(response.bodyBytes);
       // This is a sync operation on a real
       // app you'd probably prefer to use writeAsByte and handle its Future
@@ -980,53 +1003,7 @@ class Utils {
     }
   }
 
-  /* static Html htmlTexts(var strText) {
-    return Html(
-      data: strText,
-      style: {
-        "body": Style(
-          color: otherColor,
-          fontSize: FontSize((kIsWeb || Constant.isTV) ? 12 : 15),
-          fontWeight: FontWeight.w500,
-        ),
-        "link": Style(
-          color: primaryDarkColor,
-          fontSize: FontSize((kIsWeb || Constant.isTV) ? 12 : 15),
-          fontWeight: FontWeight.w500,
-        ),
-      },
-      onLinkTap: (url, _, ___) async {
-        if (await canLaunchUrl(Uri.parse(url!))) {
-          await launchUrl(
-            Uri.parse(url),
-            mode: LaunchMode.platformDefault,
-          );
-        } else {
-          throw 'Could not launch $url';
-        }
-      },
-      shrinkWrap: false,
-    );
-  }*/
 
-  static Future<void> shareVideo(context, videoTitle) async {
-    try {
-      String? shareMessage, shareDesc;
-      shareDesc = "Hey I'm watching $videoTitle . Check it out now on ${Constant.appName}! and more.";
-      if (Platform.isAndroid) {
-        shareMessage = "$shareDesc\n${Constant.androidAppUrl}";
-      } else {
-        shareMessage = "$shareDesc\n${Constant.iosAppUrl}";
-      }
-      // await FlutterShare.share(
-      //   title: Constant.appName ?? "DTLive",
-      //   linkUrl: shareMessage,
-      // );
-    } catch (e) {
-      debugPrint("shareFile Exception ===> $e");
-      return;
-    }
-  }
 
   static Future<void> redirectToUrl(String url) async {
     debugPrint("_launchUrl url ===> $url");
@@ -1041,9 +1018,12 @@ class Utils {
   }
 
   static Future<void> redirectToStore() async {
-    final appId = Platform.isAndroid ? Constant.appPackageName : Constant.appleAppId;
+    final appId =
+        Platform.isAndroid ? Constant.appPackageName : Constant.appleAppId;
     final url = Uri.parse(
-      Platform.isAndroid ? "market://details?id=$appId" : "https://apps.apple.com/app/id$appId",
+      Platform.isAndroid
+          ? "market://details?id=$appId"
+          : "https://apps.apple.com/app/id$appId",
     );
     debugPrint("_launchUrl url ===> $url");
     if (await canLaunchUrl(Uri.parse(url.toString()))) {
@@ -1056,17 +1036,6 @@ class Utils {
     }
   }
 
-  static Future<void> shareApp(shareMessage) async {
-    try {
-      // await FlutterShare.share(
-      //   title: Constant.appName ?? "",
-      //   linkUrl: shareMessage,
-      // );
-    } catch (e) {
-      debugPrint("shareFile Exception ===> $e");
-      return;
-    }
-  }
 
   /* ***************** generate Unique OrderID START ***************** */
   static String generateRandomOrderID() {
@@ -1127,10 +1096,10 @@ class Utils {
 
   static Future<String> prepareSaveDir() async {
     String localPath = (await _getSavedDir())!;
-    log("localPath ------------> $localPath");
+    debugPrint("localPath ------------> $localPath");
     final savedDir = Directory(localPath);
-    log("savedDir -------------> $savedDir");
-    log("is exists ? ----------> ${savedDir.existsSync()}");
+    debugPrint("savedDir -------------> $savedDir");
+    debugPrint("is exists ? ----------> ${savedDir.existsSync()}");
     if (!(await savedDir.exists())) {
       await savedDir.create(recursive: true);
     }
@@ -1145,40 +1114,45 @@ class Utils {
       try {
         externalStorageDirPath = "${directory?.absolute.path}/downloads/";
       } catch (err, st) {
-        log('failed to get downloads path: $err, $st');
+        debugPrint('failed to get downloads path: $err, $st');
         externalStorageDirPath = "${directory?.absolute.path}/downloads/";
       }
     } else if (Platform.isIOS) {
-      externalStorageDirPath = (await getApplicationDocumentsDirectory()).absolute.path;
+      externalStorageDirPath =
+          (await getApplicationDocumentsDirectory()).absolute.path;
     }
-    log("externalStorageDirPath ------------> $externalStorageDirPath");
+    debugPrint("externalStorageDirPath ------------> $externalStorageDirPath");
     return externalStorageDirPath;
   }
 
-  static Future<String> prepareShowSaveDir(String showName, String seasonName) async {
-    log("showName -------------> $showName");
-    log("seasonName -------------> $seasonName");
+  static Future<String> prepareShowSaveDir(
+      String showName, String seasonName) async {
+    debugPrint("showName -------------> $showName");
+    debugPrint("seasonName -------------> $seasonName");
     String localPath = (await _getShowSavedDir(showName, seasonName))!;
     final savedDir = Directory(localPath);
-    log("savedDir -------------> $savedDir");
-    log("savedDir path --------> ${savedDir.path}");
+    debugPrint("savedDir -------------> $savedDir");
+    debugPrint("savedDir path --------> ${savedDir.path}");
     if (!savedDir.existsSync()) {
       await savedDir.create(recursive: true);
     }
     return localPath;
   }
 
-  static Future<String?> _getShowSavedDir(String showName, String seasonName) async {
+  static Future<String?> _getShowSavedDir(
+      String showName, String seasonName) async {
     String? externalStorageDirPath;
 
     if (Platform.isAndroid) {
       try {
         final directory = await getExternalStorageDirectory();
-        externalStorageDirPath = "${directory?.path}/downloads/${showName.toLowerCase()}/${seasonName.toLowerCase()}";
+        externalStorageDirPath =
+            "${directory?.path}/downloads/${showName.toLowerCase()}/${seasonName.toLowerCase()}";
       } catch (err, st) {
-        log('failed to get downloads path: $err, $st');
+        debugPrint('failed to get downloads path: $err, $st');
         final directory = await getExternalStorageDirectory();
-        externalStorageDirPath = "${directory?.path}/downloads/${showName.toLowerCase()}/${seasonName.toLowerCase()}";
+        externalStorageDirPath =
+            "${directory?.path}/downloads/${showName.toLowerCase()}/${seasonName.toLowerCase()}";
       }
     } else if (Platform.isIOS) {
       externalStorageDirPath =
@@ -1188,9 +1162,15 @@ class Utils {
   }
 
   static Future<void> setDownloadComplete(
-      BuildContext context, String downloadType, int? itemId, int? videoType, int? typeId, int? otherId) async {
+      BuildContext context,
+      String downloadType,
+      int? itemId,
+      int? videoType,
+      int? typeId,
+      int? otherId) async {
     if (downloadType == "Show") {
-      final showDetailsProvider = Provider.of<ShowDetailsProvider>(context, listen: false);
+      final showDetailsProvider =
+          Provider.of<ShowDetailsProvider>(context, listen: false);
       showDetailsProvider.setDownloadComplete(
         context,
         itemId,
@@ -1199,7 +1179,8 @@ class Utils {
         otherId,
       );
     } else if (downloadType == "Video") {
-      final videoDetailsProvider = Provider.of<VideoDetailsProvider>(context, listen: false);
+      final videoDetailsProvider =
+          Provider.of<VideoDetailsProvider>(context, listen: false);
       videoDetailsProvider.setDownloadComplete(
         context,
         itemId,

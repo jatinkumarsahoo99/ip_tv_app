@@ -399,7 +399,7 @@ class SearchState extends State<Search> {
                   child: InkWell(
                     borderRadius: BorderRadius.circular(4),
                     onTap: () {
-                      log("Clicked on position ==> $position");
+                      debugPrint("Clicked on position ==> $position");
                       Utils.openDetails(
                         context: context,
                         videoId: searchProvider.searchModel.video?[position].id ?? 0,
@@ -457,7 +457,7 @@ class SearchState extends State<Search> {
                   type: MaterialType.transparency,
                   child: InkWell(
                     onTap: () {
-                      log("Clicked on position ==> $position");
+                      debugPrint("Clicked on position ==> $position");
                       Utils.openDetails(
                         context: context,
                         videoId: searchProvider.searchModel.tvshow?[position].id ?? 0,

@@ -3,6 +3,12 @@ import 'dart:convert';
 import 'package:ip_tv_app/model/sectionlistmodel.dart' as section;
 import 'package:ip_tv_app/model/channelsectionmodel.dart' as channel;
 import 'package:ip_tv_app/pages/tvvideosbyid.dart';
+import 'package:ip_tv_app/utils/color.dart';
+import 'package:ip_tv_app/utils/dimens.dart';
+import 'package:ip_tv_app/utils/utils.dart';
+import 'package:ip_tv_app/widget/focusbase.dart';
+import 'package:ip_tv_app/widget/mynetworkimg.dart';
+import 'package:ip_tv_app/widget/mytext.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:sidebarx/sidebarx.dart';
@@ -11,15 +17,9 @@ import '../model/channelsectionmodel.dart';
 import '../pages/player_pod.dart';
 import '../pages/player_vimeo.dart';
 import '../pages/player_youtube.dart';
-import '../player/bit_movin_player.dart';
-import '../utils/color.dart';
+import '../player/PodPlayer1.dart';
 import '../utils/constant.dart';
-import '../utils/dimens.dart';
 import '../utils/strings.dart';
-import '../utils/utils.dart';
-import 'focusbase.dart';
-import 'mynetworkimg.dart';
-import 'mytext.dart';
 
 class TvChannelList extends StatefulWidget {
   final dynamic sectionDataList;
@@ -27,14 +27,15 @@ class TvChannelList extends StatefulWidget {
   final String? dataType, dataFrom;
   final int? typeId;
   const TvChannelList({
-    super.key,
+    Key? key,
     required this.sectionDataList,
     required this.sectionPos,
     required this.dataType,
     required this.dataFrom,
     required this.typeId,
     required SidebarXController controller,
-  })  : _controller = controller;
+  })  : _controller = controller,
+        super(key: key);
 
   final SidebarXController _controller;
 
@@ -105,7 +106,7 @@ class _TvChannelListState extends State<TvChannelList> {
                 builder: (context) {
                   if ((sectionBannerList?[index].video320 ?? "")
                       .contains("youtube")) {
-                    return BitMovInPlayerVideo(
+                    return PlayerYoutube(
                       "Channel",
                       0,
                       0,
@@ -115,10 +116,9 @@ class _TvChannelListState extends State<TvChannelList> {
                       0,
                       "",
                       sectionBannerList?[index].thumbnail ?? "",
-                      isLive: true,
                     );
                   } else {
-                    return BitMovInPlayerVideo(
+                    return PlayerPod(
                       "Channel",
                       0,
                       0,
@@ -128,7 +128,6 @@ class _TvChannelListState extends State<TvChannelList> {
                       0,
                       "",
                       sectionBannerList?[index].thumbnail ?? "",
-                      isLive: true,
                     );
                   }
                 },
@@ -141,7 +140,7 @@ class _TvChannelListState extends State<TvChannelList> {
                 builder: (context) {
                   if ((sectionBannerList?[index].video320 ?? "")
                       .contains("youtube")) {
-                    return BitMovInPlayerVideo(
+                    return PlayerYoutube(
                       "Channel",
                       0,
                       0,
@@ -151,11 +150,10 @@ class _TvChannelListState extends State<TvChannelList> {
                       0,
                       "",
                       sectionBannerList?[index].thumbnail ?? "",
-                      isLive: true,
                     );
                   } else if ((sectionBannerList?[index].video320 ?? "")
                       .contains("vimeo")) {
-                    return BitMovInPlayerVideo(
+                    return PlayerVimeo(
                       "Channel",
                       0,
                       0,
@@ -165,10 +163,9 @@ class _TvChannelListState extends State<TvChannelList> {
                       0,
                       "",
                       sectionBannerList?[index].thumbnail ?? "",
-                      isLive: true,
                     );
                   } else {
-                    return BitMovInPlayerVideo(
+                    return PlayerPod(
                       "Channel",
                       0,
                       0,
@@ -178,7 +175,6 @@ class _TvChannelListState extends State<TvChannelList> {
                       0,
                       "",
                       sectionBannerList?[index].thumbnail ?? "",
-                      isLive: true,
                     );
                   }
                 },
@@ -214,7 +210,7 @@ class _TvChannelListState extends State<TvChannelList> {
         separatorBuilder: (context, index) => const SizedBox(width: 0),
         shrinkWrap: true,
         itemBuilder: (BuildContext context, int index) {
-          // print("Data is>>>"+(dataList?[index].toString()??""));
+          // debugPrint("Data is>>>"+(dataList?[index].toString()??""));
           return FocusBase(
             focusColor: white,
             onFocus: (isFocused) {},

@@ -33,9 +33,11 @@ import 'package:flutter_locales/flutter_locales.dart';
 // import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  WakelockPlus.enable();
   await SystemChrome.setPreferredOrientations(
     [
       // DeviceOrientation.portraitUp,
@@ -165,7 +167,7 @@ class _MyAppState extends State<MyApp> {
       // DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
       // AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
       // Constant.isTV = androidInfo.systemFeatures.contains('android.software.leanback');
-      log("isTV =======================> ${Constant.isTV}");
+      debugPrint("isTV =======================> ${Constant.isTV}");
     }
   }
 }

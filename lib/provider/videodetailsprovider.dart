@@ -96,13 +96,13 @@ class VideoDetailsProvider extends ChangeNotifier {
   }
 
   setTabClick(clickedOn) {
-    log("clickedOn ===> $clickedOn");
+    debugPrint("clickedOn ===> $clickedOn");
     tabClickedOn = clickedOn;
     notifyListeners();
   }
 
   clearProvider() {
-    log("<================ clearProvider ================>");
+    debugPrint("<================ clearProvider ================>");
     sectionDetailModel = SectionDetailModel();
     successModel = SuccessModel();
     tabClickedOn = "related";

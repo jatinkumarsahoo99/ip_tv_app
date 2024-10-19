@@ -46,7 +46,7 @@ class SectionByTypeProvider extends ChangeNotifier {
   }
 
   clearProvider() {
-    log("<================ clearProvider ================>");
+    debugPrint("<================ clearProvider ================>");
     sectionBannerModel = SectionBannerModel();
     sectionListModel = SectionListModel();
   }

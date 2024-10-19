@@ -426,14 +426,14 @@ class _EpisodeBySeasonState extends State<EpisodeBySeason> {
       String? vUploadType = (episodeList?[epiPos].videoUploadType ?? "");
       String? videoThumb = (episodeList?[epiPos].landscape ?? "");
       String? epiUrl = (episodeList?[epiPos].video320 ?? "");
-      log("epiID ========> $epiID");
-      log("showID =======> $showID");
-      log("vType ========> $vType");
-      log("vTypeID ======> $vTypeID");
-      log("stopTime =====> $stopTime");
-      log("vUploadType ==> $vUploadType");
-      log("videoThumb ===> $videoThumb");
-      log("epiUrl =======> $epiUrl");
+      debugPrint("epiID ========> $epiID");
+      debugPrint("showID =======> $showID");
+      debugPrint("vType ========> $vType");
+      debugPrint("vTypeID ======> $vTypeID");
+      debugPrint("stopTime =====> $stopTime");
+      debugPrint("vUploadType ==> $vUploadType");
+      debugPrint("videoThumb ===> $videoThumb");
+      debugPrint("epiUrl =======> $epiUrl");
 
       if (!mounted) return;
       if (epiUrl.isEmpty || epiUrl == "") {
@@ -471,7 +471,7 @@ class _EpisodeBySeasonState extends State<EpisodeBySeason> {
         vStopTime: stopTime,
       );
 
-      log("isContinue ===> $isContinue");
+      debugPrint("isContinue ===> $isContinue");
       if (isContinue != null && isContinue == true) {
         await getAllEpisode();
       }

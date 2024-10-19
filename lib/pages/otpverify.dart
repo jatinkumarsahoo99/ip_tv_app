@@ -236,7 +236,7 @@
 //   }
 //
 //   _onVerificationCompleted(PhoneAuthCredential authCredential) async {
-//     log("verification completed ======> ${authCredential.smsCode}");
+//     debugPrint("verification completed ======> ${authCredential.smsCode}");
 //     setState(() {
 //       pinPutController.text = authCredential.smsCode ?? "";
 //     });
@@ -244,7 +244,7 @@
 //
 //   _onVerificationFailed(FirebaseAuthException exception) {
 //     if (exception.code == 'invalid-phone-number') {
-//       log("The phone number entered is invalid!");
+//       debugPrint("The phone number entered is invalid!");
 //       Utils.showSnackbar(context, "fail", "invalidphonenumber", true);
 //     }
 //   }
@@ -252,13 +252,13 @@
 //   _onCodeSent(String verificationId, int? forceResendingToken) {
 //     this.verificationId = verificationId;
 //     this.forceResendingToken = forceResendingToken;
-//     log("verificationId =======> $verificationId");
-//     log("resendingToken =======> ${forceResendingToken.toString()}");
-//     log("code sent");
+//     debugPrint("verificationId =======> $verificationId");
+//     debugPrint("resendingToken =======> ${forceResendingToken.toString()}");
+//     debugPrint("code sent");
 //   }
 //
 //   _onCodeTimeout(String verificationId) {
-//     log("_onCodeTimeout verificationId =======> $verificationId");
+//     debugPrint("_onCodeTimeout verificationId =======> $verificationId");
 //     this.verificationId = verificationId;
 //     prDialog.hide();
 //     codeResended = false;
@@ -269,22 +269,22 @@
 //     bool error = false;
 //     UserCredential? userCredential;
 //
-//     log("_checkOTPAndLogin verificationId =====> $verificationId");
-//     log("_checkOTPAndLogin smsCode =====> ${pinPutController.text}");
+//     debugPrint("_checkOTPAndLogin verificationId =====> $verificationId");
+//     debugPrint("_checkOTPAndLogin smsCode =====> ${pinPutController.text}");
 //     // Create a PhoneAuthCredential with the code
 //     PhoneAuthCredential? phoneAuthCredential = PhoneAuthProvider.credential(
 //       verificationId: verificationId ?? "",
 //       smsCode: pinPutController.text.toString(),
 //     );
 //
-//     log("phoneAuthCredential.smsCode        =====> ${phoneAuthCredential.smsCode}");
-//     log("phoneAuthCredential.verificationId =====> ${phoneAuthCredential.verificationId}");
+//     debugPrint("phoneAuthCredential.smsCode        =====> ${phoneAuthCredential.smsCode}");
+//     debugPrint("phoneAuthCredential.verificationId =====> ${phoneAuthCredential.verificationId}");
 //     try {
 //       userCredential = await _auth.signInWithCredential(phoneAuthCredential);
-//       log("_checkOTPAndLogin userCredential =====> ${userCredential.user?.phoneNumber ?? ""}");
+//       debugPrint("_checkOTPAndLogin userCredential =====> ${userCredential.user?.phoneNumber ?? ""}");
 //     } on FirebaseAuthException catch (e) {
 //       await prDialog.hide();
-//       log("_checkOTPAndLogin error Code =====> ${e.code}");
+//       debugPrint("_checkOTPAndLogin error Code =====> ${e.code}");
 //       if (e.code == 'invalid-verification-code' ||
 //           e.code == 'invalid-verification-id') {
 //         if (!mounted) return;
@@ -298,7 +298,7 @@
 //         error = true;
 //       }
 //     }
-//     log("Firebase Verification Complated & phoneNumber => ${userCredential?.user?.phoneNumber} and isError => $error");
+//     debugPrint("Firebase Verification Complated & phoneNumber => ${userCredential?.user?.phoneNumber} and isError => $error");
 //     if (!error && userCredential != null) {
 //       _login(widget.mobileNumber.toString());
 //     } else {
@@ -309,7 +309,7 @@
 //   }
 //
 //   _login(String mobile) async {
-//     log("click on Submit mobile => $mobile");
+//     debugPrint("click on Submit mobile => $mobile");
 //     var generalProvider = Provider.of<GeneralProvider>(context, listen: false);
 //     if (!prDialog.isShowing()) {
 //       Utils.showProgress(context, prDialog);
@@ -321,8 +321,8 @@
 //
 //     if (!generalProvider.loading) {
 //       if (generalProvider.loginOTPModel.status == 200) {
-//         log('loginOTPModel ==>> ${generalProvider.loginOTPModel.toString()}');
-//         log('Login Successfull!');
+//         debugPrint('loginOTPModel ==>> ${generalProvider.loginOTPModel.toString()}');
+//         debugPrint('Login Successfull!');
 //         await sharePref.save(
 //             "userid", generalProvider.loginOTPModel.result?[0].id.toString());
 //         await sharePref.save("username",
@@ -339,7 +339,7 @@
 //         // Set UserID for Next
 //         Constant.userID =
 //             generalProvider.loginOTPModel.result?[0].id.toString();
-//         log('Constant userID ==>> ${Constant.userID}');
+//         debugPrint('Constant userID ==>> ${Constant.userID}');
 //
 //         await homeProvider.setLoading(true);
 //         await sectionDataProvider.getSectionBanner("0", "1");

@@ -221,7 +221,7 @@ class TVRentStoreState extends State<TVRentStore> {
                     focusColor: white,
                     borderRadius: BorderRadius.circular(4),
                     onTap: () {
-                      log("Clicked on position ==> $position");
+                      debugPrint("Clicked on position ==> $position");
                       _openDetailPage(
                         rentStoreProvider.rentModel.video?[position].id ?? 0,
                         rentStoreProvider
@@ -419,7 +419,7 @@ class TVRentStoreState extends State<TVRentStore> {
                     focusColor: white,
                     borderRadius: BorderRadius.circular(4),
                     onTap: () {
-                      log("Clicked on position ==> $position");
+                      debugPrint("Clicked on position ==> $position");
                       _openDetailPage(
                         rentStoreProvider.rentModel.tvshow?[position].id ?? 0,
                         rentStoreProvider

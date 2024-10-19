@@ -81,10 +81,10 @@ class ApiService {
   /* type => 1-Facebook, 2-Google */
   // login API
   Future<LoginRegisterModel> loginWithSocial(email, name, type, File? profileImg) async {
-    log("email :==> $email");
-    log("name :==> $name");
-    log("type :==> $type");
-    log("profileImg :==> $profileImg");
+    debugPrint("email :==> $email");
+    debugPrint("name :==> $name");
+    debugPrint("type :==> $type");
+    debugPrint("profileImg :==> $profileImg");
 
     LoginRegisterModel loginModel;
     String gmailLogin = "login";
@@ -113,7 +113,7 @@ class ApiService {
   /* type => 3-OTP */
   // login API
   Future<LoginRegisterModel> loginWithOTP(mobile) async {
-    log("mobile :==> $mobile");
+    debugPrint("mobile :==> $mobile");
 
     LoginRegisterModel loginModel;
     String doctorLogin = "login";
@@ -132,7 +132,7 @@ class ApiService {
 
   // get_tv_login_code API
   Future<TvCodeModel> tvLoginCode(deviceToken) async {
-    log("deviceToken :==> $deviceToken");
+    debugPrint("deviceToken :==> $deviceToken");
 
     TvCodeModel tvCodeModel;
     String tvLoginCodeAPI = "get_tv_login_code";
@@ -150,7 +150,7 @@ class ApiService {
 
   // forgot_password API
   Future<SuccessModel> forgotPassword(email) async {
-    log("email :==> $email");
+    debugPrint("email :==> $email");
 
     SuccessModel successModel;
     String doctorLogin = "forgot_password";
@@ -180,7 +180,7 @@ class ApiService {
 
   // get_profile API
   Future<ProfileModel> profile() async {
-    log("profile userID :==> ${Constant.userID}");
+    debugPrint("profile userID :==> ${Constant.userID}");
 
     ProfileModel profileModel;
     String doctorLogin = "get_profile";
@@ -198,8 +198,8 @@ class ApiService {
 
   // update_profile API
   Future<SuccessModel> updateProfile(name) async {
-    log("updateProfile userID :==> ${Constant.userID}");
-    log("updateProfile name :==> $name");
+    debugPrint("updateProfile userID :==> ${Constant.userID}");
+    debugPrint("updateProfile name :==> $name");
 
     SuccessModel successModel;
     String doctorLogin = "update_profile";
@@ -218,11 +218,11 @@ class ApiService {
 
   // image_upload API
   Future<SuccessModel> imageUpload(File? profileImg) async {
-    log("ProfileImg Filename :==> ${profileImg?.path.split('/').last}");
-    log("profileImg Extension :==> ${profileImg?.path.split('/').last.split(".").last}");
+    debugPrint("ProfileImg Filename :==> ${profileImg?.path.split('/').last}");
+    debugPrint("profileImg Extension :==> ${profileImg?.path.split('/').last.split(".").last}");
     SuccessModel uploadImgModel;
     String uploadImage = "image_upload";
-    log("imageUpload API :==> $baseUrl$uploadImage");
+    debugPrint("imageUpload API :==> $baseUrl$uploadImage");
     Response response = await dio.post(
       '$baseUrl$uploadImage',
       data: FormData.fromMap({
@@ -269,8 +269,8 @@ class ApiService {
 
   // get_banner API
   Future<SectionBannerModel> sectionBanner(typeId, isHomePage) async {
-    log('sectionBanner typeId ==>>> $typeId');
-    log('sectionBanner isHomePage ==>>> $isHomePage');
+    debugPrint('sectionBanner typeId ==>>> $typeId');
+    debugPrint('sectionBanner isHomePage ==>>> $isHomePage');
     SectionBannerModel sectionBannerModel;
     String sectionBanner = "get_banner";
     Response response = await dio.post(
@@ -491,7 +491,7 @@ class ApiService {
 
   // search_video API
   Future<SearchModel> searchVideo(searchText) async {
-    log('searchVideo searchText ==>>> $searchText');
+    debugPrint('searchVideo searchText ==>>> $searchText');
     SearchModel searchModel;
     String search = "search_video";
     Response response = await dio.post(
@@ -553,8 +553,8 @@ class ApiService {
 
   // video_by_category API
   Future<VideoByIdModel> videoByCategory(categoryID, typeId) async {
-    log('videoByCategory categoryID ==>>> $categoryID');
-    log('videoByCategory typeId ====>>>>> $typeId');
+    debugPrint('videoByCategory categoryID ==>>> $categoryID');
+    debugPrint('videoByCategory typeId ====>>>>> $typeId');
     VideoByIdModel videoByIdModel;
     String byCategory = "video_by_category";
     Response response = await dio.post(
@@ -572,8 +572,8 @@ class ApiService {
 
   // video_by_language API
   Future<VideoByIdModel> videoByLanguage(languageID, typeId) async {
-    log('videoByLanguage languageID ==>>> $languageID');
-    log('videoByLanguage typeId ====>>>>> $typeId');
+    debugPrint('videoByLanguage languageID ==>>> $languageID');
+    debugPrint('videoByLanguage typeId ====>>>>> $typeId');
     VideoByIdModel videoByIdModel;
     String byLanguage = "video_by_language";
     Response response = await dio.post(
@@ -591,7 +591,7 @@ class ApiService {
 
   // get_package API
   Future<SubscriptionModel> subscriptionPackage() async {
-    log('subscriptionPackage userID ==>>> ${Constant.userID}');
+    debugPrint('subscriptionPackage userID ==>>> ${Constant.userID}');
     SubscriptionModel subscriptionModel;
     String getPackage = "get_package";
     Response response = await dio.post(
@@ -607,11 +607,11 @@ class ApiService {
 
   // get_bookmark_video API
   Future<WatchlistModel> watchlist() async {
-    log("watchlist userID :==> ${Constant.userID}");
+    debugPrint("watchlist userID :==> ${Constant.userID}");
 
     WatchlistModel watchlistModel;
     String getBookmarkVideo = "get_bookmark_video";
-    log("getBookmarkVideo API :==> $baseUrl$getBookmarkVideo");
+    debugPrint("getBookmarkVideo API :==> $baseUrl$getBookmarkVideo");
     Response response = await dio.post(
       '$baseUrl$getBookmarkVideo',
       options: optHeaders,
@@ -628,7 +628,7 @@ class ApiService {
   Future<PaymentOptionModel> getPaymentOption() async {
     PaymentOptionModel paymentOptionModel;
     String paymentOption = "get_payment_option";
-    log("paymentOption API :==> $baseUrl$paymentOption");
+    debugPrint("paymentOption API :==> $baseUrl$paymentOption");
     Response response = await dio.post(
       '$baseUrl$paymentOption',
       options: optHeaders,
@@ -642,7 +642,7 @@ class ApiService {
   Future<CouponModel> applyPackageCoupon(couponCode, packageId) async {
     CouponModel couponModel;
     String applyCoupon = "apply_coupon";
-    log("applyPackageCoupon API :==> $baseUrl$applyCoupon");
+    debugPrint("applyPackageCoupon API :==> $baseUrl$applyCoupon");
     Response response = await dio.post(
       '$baseUrl$applyCoupon',
       options: optHeaders,
@@ -662,7 +662,7 @@ class ApiService {
   Future<CouponModel> applyRentCoupon(couponCode, videoId, typeId, videoType, price) async {
     CouponModel couponModel;
     String applyCoupon = "apply_coupon";
-    log("applyRentCoupon API :==> $baseUrl$applyCoupon");
+    debugPrint("applyRentCoupon API :==> $baseUrl$applyCoupon");
     Response response = await dio.post(
       '$baseUrl$applyCoupon',
       options: optHeaders,
@@ -686,7 +686,7 @@ class ApiService {
       merchantID, orderId, custmoreID, channelID, txnAmount, website, callbackURL, industryTypeID) async {
     PayTmModel payTmModel;
     String paytmToken = "get_payment_token";
-    log("paytmToken API :==> $baseUrl$paytmToken");
+    debugPrint("paytmToken API :==> $baseUrl$paytmToken");
     Response response = await dio.post(
       '$baseUrl$paytmToken',
       options: optHeaders,
@@ -708,13 +708,13 @@ class ApiService {
 
   // add_transaction API
   Future<SuccessModel> addTransaction(packageId, description, amount, paymentId, currencyCode, couponCode) async {
-    log('addTransaction userID ==>>> ${Constant.userID}');
-    log('addTransaction packageId ==>>> $packageId');
-    log('addTransaction description ==>>> $description');
-    log('addTransaction amount ==>>> $amount');
-    log('addTransaction paymentId ==>>> $paymentId');
-    log('addTransaction currencyCode ==>>> $currencyCode');
-    log('addTransaction couponCode ==>>> $couponCode');
+    debugPrint('addTransaction userID ==>>> ${Constant.userID}');
+    debugPrint('addTransaction packageId ==>>> $packageId');
+    debugPrint('addTransaction description ==>>> $description');
+    debugPrint('addTransaction amount ==>>> $amount');
+    debugPrint('addTransaction paymentId ==>>> $paymentId');
+    debugPrint('addTransaction currencyCode ==>>> $currencyCode');
+    debugPrint('addTransaction couponCode ==>>> $couponCode');
     SuccessModel successModel;
     String transaction = "add_transaction";
     Response response = await dio.post(
@@ -736,12 +736,12 @@ class ApiService {
 
   // add_rent_transaction API
   Future<SuccessModel> addRentTransaction(videoId, price, typeId, videoType, couponCode) async {
-    log('addRentTransaction userID ==>>> ${Constant.userID}');
-    log('addRentTransaction video_id ==>>> $videoId');
-    log('addRentTransaction price ==>>> $price');
-    log('addRentTransaction typeId ==>>> $typeId');
-    log('addRentTransaction videoType ==>>> $videoType');
-    log('addTransaction couponCode ==>>> $couponCode');
+    debugPrint('addRentTransaction userID ==>>> ${Constant.userID}');
+    debugPrint('addRentTransaction video_id ==>>> $videoId');
+    debugPrint('addRentTransaction price ==>>> $price');
+    debugPrint('addRentTransaction typeId ==>>> $typeId');
+    debugPrint('addRentTransaction videoType ==>>> $videoType');
+    debugPrint('addTransaction couponCode ==>>> $couponCode');
     SuccessModel successModel;
     String rentTransaction = "add_rent_transaction";
     Response response = await dio.post(

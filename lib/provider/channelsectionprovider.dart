@@ -34,7 +34,7 @@ class ChannelSectionProvider extends ChangeNotifier {
   }
 
   clearProvider() {
-    log("<================ clearProvider ================>");
+    debugPrint("<================ clearProvider ================>");
     channelSectionModel = ChannelSectionModel();
   }
 }

@@ -33,7 +33,7 @@ class ShowDetailsProvider extends ChangeNotifier {
   setEpisodeBySeason(episodeModel) async {
     episodeBySeasonModel = EpisodeBySeasonModel();
     episodeBySeasonModel = episodeModel;
-    log("setEpisodeBySeason episodeBySeasonModel ================> ${episodeBySeasonModel.result?.length}");
+    debugPrint("setEpisodeBySeason episodeBySeasonModel ================> ${episodeBySeasonModel.result?.length}");
     await getLastWatchedEpisode();
     notifyListeners();
   }
@@ -59,7 +59,7 @@ class ShowDetailsProvider extends ChangeNotifier {
         mCurrentEpiPos == -1) {
       mCurrentEpiPos = 0;
     }
-    log("mCurrentEpiPos ========> $mCurrentEpiPos");
+    debugPrint("mCurrentEpiPos ========> $mCurrentEpiPos");
   }
 
   Future<void> setBookMark(
@@ -112,7 +112,7 @@ class ShowDetailsProvider extends ChangeNotifier {
   }
 
   setSeasonPosition(int position) async {
-    log("setSeasonPosition ===> $position");
+    debugPrint("setSeasonPosition ===> $position");
     mCurrentEpiPos = -1;
     await getLastWatchedEpisode();
     seasonPos = position;
@@ -132,13 +132,13 @@ class ShowDetailsProvider extends ChangeNotifier {
   }
 
   setTabClick(clickedOn) {
-    log("clickedOn ===> $clickedOn");
+    debugPrint("clickedOn ===> $clickedOn");
     tabClickedOn = clickedOn;
     notifyListeners();
   }
 
   clearProvider() {
-    log("<================ clearProvider ================>");
+    debugPrint("<================ clearProvider ================>");
     sectionDetailModel = SectionDetailModel();
     episodeBySeasonModel = EpisodeBySeasonModel();
     successModel = SuccessModel();

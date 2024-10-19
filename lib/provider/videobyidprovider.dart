@@ -40,7 +40,7 @@ class VideoByIDProvider extends ChangeNotifier {
   }
 
   clearVideoByIDProvider() {
-    log("<================ clearVideoByIDProvider ================>");
+    debugPrint("<================ clearVideoByIDProvider ================>");
     videoByIdModel = VideoByIdModel();
   }
 }

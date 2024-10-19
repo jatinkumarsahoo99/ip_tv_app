@@ -184,13 +184,13 @@ class _LoginScreenState extends State<LoginScreen> {
       final generalProvider =
       Provider.of<GeneralProvider>(context, listen: false);
       await generalProvider.loginWithSocial(mobile, password, "mobile", null);
-      log('checkAndNavigate loading ==>> ${generalProvider.loading}');
+      debugPrint('checkAndNavigate loading ==>> ${generalProvider.loading}');
 
       if (!generalProvider.loading) {
         if (generalProvider.loginGmailModel.status == 200) {
-          log('loginGmailModel ==>> ${generalProvider.loginGmailModel
+          debugPrint('loginGmailModel ==>> ${generalProvider.loginGmailModel
               .toString()}');
-          log('Login Successfull!');
+          debugPrint('Login Successfull!');
           await sharePref.save(
               "userid",
               generalProvider.loginGmailModel.result?[0].id.toString());
@@ -211,7 +211,7 @@ class _LoginScreenState extends State<LoginScreen> {
           // Set UserID for Next
           Constant.userID =
               generalProvider.loginGmailModel.result?[0].id.toString();
-          log('Constant userID ==>> ${Constant.userID}');
+          debugPrint('Constant userID ==>> ${Constant.userID}');
 
           await homeProvider.setSelectedTab(0);
           await sectionDataProvider.getSectionBanner("0", "1");
@@ -243,10 +243,10 @@ class _LoginScreenState extends State<LoginScreen> {
     email = mail;
     userName = displayName;
     strType = type;
-    log('checkAndNavigate email ==>> $email');
-    log('checkAndNavigate userName ==>> $userName');
-    log('checkAndNavigate strType ==>> $strType');
-    // log('checkAndNavigate mProfileImg :===> $mProfileImg');
+    debugPrint('checkAndNavigate email ==>> $email');
+    debugPrint('checkAndNavigate userName ==>> $userName');
+    debugPrint('checkAndNavigate strType ==>> $strType');
+    // debugPrint('checkAndNavigate mProfileImg :===> $mProfileImg');
     if (!(prDialog?.isShowing())!) {
       Utils.showProgress(context, prDialog!);
     }
@@ -256,12 +256,12 @@ class _LoginScreenState extends State<LoginScreen> {
     final generalProvider =
         Provider.of<GeneralProvider>(context, listen: false);
     await generalProvider.loginWithSocial(email, userName, "mobile", null);
-    log('checkAndNavigate loading ==>> ${generalProvider.loading}');
+    debugPrint('checkAndNavigate loading ==>> ${generalProvider.loading}');
 
     if (!generalProvider.loading) {
       if (generalProvider.loginGmailModel.status == 200) {
-        log('loginGmailModel ==>> ${generalProvider.loginGmailModel.toString()}');
-        log('Login Successfull!');
+        debugPrint('loginGmailModel ==>> ${generalProvider.loginGmailModel.toString()}');
+        debugPrint('Login Successfull!');
         await sharePref.save(
             "userid", generalProvider.loginGmailModel.result?[0].id.toString());
         await sharePref.save("username",
@@ -278,7 +278,7 @@ class _LoginScreenState extends State<LoginScreen> {
         // Set UserID for Next
         Constant.userID =
             generalProvider.loginGmailModel.result?[0].id.toString();
-        log('Constant userID ==>> ${Constant.userID}');
+        debugPrint('Constant userID ==>> ${Constant.userID}');
 
         await homeProvider.setSelectedTab(0);
         await sectionDataProvider.getSectionBanner("0", "1");

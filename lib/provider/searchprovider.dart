@@ -20,14 +20,14 @@ class SearchProvider extends ChangeNotifier {
   }
 
   setLoading(bool isLoading) {
-    log("setDataVisibility isLoading :==> $isLoading");
+    debugPrint("setDataVisibility isLoading :==> $isLoading");
     loading = isLoading;
     notifyListeners();
   }
 
   void setDataVisibility(bool isVideoVisible, bool isShowVisible) {
-    log("setDataVisibility isVideoVisible :==> $isVideoVisible");
-    log("setDataVisibility isShowVisible :==> $isShowVisible");
+    debugPrint("setDataVisibility isVideoVisible :==> $isVideoVisible");
+    debugPrint("setDataVisibility isShowVisible :==> $isShowVisible");
     isVideoClick = isVideoVisible;
     isShowClick = isShowVisible;
     notifyListeners();
@@ -38,7 +38,7 @@ class SearchProvider extends ChangeNotifier {
   }
 
   clearProvider() {
-    log("============ clearSearchProvider ============");
+    debugPrint("============ clearSearchProvider ============");
     searchModel = SearchModel();
     isVideoClick = true;
     isShowClick = false;

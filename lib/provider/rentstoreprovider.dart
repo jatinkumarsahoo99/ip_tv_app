@@ -21,7 +21,7 @@ class RentStoreProvider extends ChangeNotifier {
   }
 
   clearRentStoreProvider() {
-    log("<================ clearRentStoreProvider ================>");
+    debugPrint("<================ clearRentStoreProvider ================>");
     rentModel = RentModel();
   }
 }

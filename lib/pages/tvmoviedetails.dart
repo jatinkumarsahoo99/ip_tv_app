@@ -48,10 +48,10 @@ class TVMovieDetailsState extends State<TVMovieDetails> {
     videoDetailsProvider =
         Provider.of<VideoDetailsProvider>(context, listen: false);
     super.initState();
-    log("initState videoId ==> ${widget.videoId}");
-    log("initState upcomingType ==> ${widget.upcomingType}");
-    log("initState videoType ==> ${widget.videoType}");
-    log("initState typeId ==> ${widget.typeId}");
+    debugPrint("initState videoId ==> ${widget.videoId}");
+    debugPrint("initState upcomingType ==> ${widget.upcomingType}");
+    debugPrint("initState videoType ==> ${widget.videoType}");
+    debugPrint("initState typeId ==> ${widget.typeId}");
     _getData();
   }
 
@@ -124,7 +124,7 @@ class TVMovieDetailsState extends State<TVMovieDetails> {
                 videoDetailsProvider.sectionDetailModel.cast?[i].updatedAt ??
                     "";
             directorList?.add(cast);
-            log("directorList size ===> ${directorList?.length ?? 0}");
+            debugPrint("directorList size ===> ${directorList?.length ?? 0}");
           }
         }
       }
@@ -265,7 +265,7 @@ class TVMovieDetailsState extends State<TVMovieDetails> {
                           focusColor: gray.withOpacity(0.5),
                           onFocus: (isFocused) {},
                           onPressed: () async {
-                            log("isBookmark ====> ${videoDetailsProvider.sectionDetailModel.result?.isBookmark ?? 0}");
+                            debugPrint("isBookmark ====> ${videoDetailsProvider.sectionDetailModel.result?.isBookmark ?? 0}");
                             if (Constant.userID != null) {
                               await videoDetailsProvider.setBookMark(
                                 context,
@@ -1384,7 +1384,7 @@ class TVMovieDetailsState extends State<TVMovieDetails> {
             onFocus: (isFocused) {},
             focusColor: white,
             onPressed: () async {
-              log("Clicked on index ==> $index");
+              debugPrint("Clicked on index ==> $index");
               if ((relatedDataList?[index].videoType ?? 0) == 5) {
                 if ((relatedDataList?[index].upcomingType ?? 0) == 1) {
                   if (!(context.mounted)) return;
@@ -1533,11 +1533,11 @@ class TVMovieDetailsState extends State<TVMovieDetails> {
     /* CHECK SUBSCRIPTION */
     if (playType != "Trailer") {
       bool? isPrimiumUser = await _checkSubsRentLogin();
-      log("isPrimiumUser =============> $isPrimiumUser");
+      debugPrint("isPrimiumUser =============> $isPrimiumUser");
       if (!isPrimiumUser) return;
     }
     /* CHECK SUBSCRIPTION */
-    log("ID :===> ${(videoDetailsProvider.sectionDetailModel.result?.id ?? 0)}");
+    debugPrint("ID :===> ${(videoDetailsProvider.sectionDetailModel.result?.id ?? 0)}");
 
     int? vID = (videoDetailsProvider.sectionDetailModel.result?.id ?? 0);
     int? vType =
@@ -1608,7 +1608,7 @@ class TVMovieDetailsState extends State<TVMovieDetails> {
       vStopTime: stopTime,
     );
 
-    log("isContinue ===> $isContinue");
+    debugPrint("isContinue ===> $isContinue");
     if (isContinue != null && isContinue == true) {
       _getData();
     }

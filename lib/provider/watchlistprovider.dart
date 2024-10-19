@@ -55,7 +55,7 @@ class WatchlistProvider extends ChangeNotifier {
   }
 
   clearProvider() {
-    log("<================ clearProvider ================>");
+    debugPrint("<================ clearProvider ================>");
     watchlistModel = WatchlistModel();
     successModel = SuccessModel();
   }

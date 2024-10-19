@@ -60,7 +60,7 @@ class SplashState extends State<Splash> {
     final homeProvider = Provider.of<HomeProvider>(context, listen: false);
     await homeProvider.setLoading(true);
     Constant.userID = await sharedPre.read('userid');
-    log('Constant userID ==> ${Constant.userID}');
+    debugPrint('Constant userID ==> ${Constant.userID}');
     if (!mounted) return;
     if(!kIsWeb) {
       await isUpdateApp(homeProvider);

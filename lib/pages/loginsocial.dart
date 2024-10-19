@@ -168,14 +168,14 @@
 //                       hintText: enterYourMobileNumber,
 //                     ),
 //                     onChanged: (phone) {
-//                       log('===> ${phone.completeNumber}');
-//                       log('===> ${numberController.text}');
+//                       debugPrint('===> ${phone.completeNumber}');
+//                       debugPrint('===> ${numberController.text}');
 //                       mobileNumber = phone.completeNumber;
-//                       log('===>mobileNumber $mobileNumber');
+//                       debugPrint('===>mobileNumber $mobileNumber');
 //                     },
 //                     onCountryChanged: (country) {
-//                       log('===> ${country.name}');
-//                       log('===> ${country.code}');
+//                       debugPrint('===> ${country.name}');
+//                       debugPrint('===> ${country.code}');
 //                     },
 //                   ),
 //                 ),
@@ -191,7 +191,7 @@
 //                       Utils.showSnackbar(
 //                           context, "info", "login_with_mobile_note", true);
 //                     } else {
-//                       log("mobileNumber ==> $mobileNumber");
+//                       debugPrint("mobileNumber ==> $mobileNumber");
 //                       Navigator.push(
 //                         context,
 //                         MaterialPageRoute(
@@ -503,10 +503,10 @@
 //     email = mail;
 //     userName = displayName;
 //     strType = type;
-//     log('checkAndNavigate email ==>> $email');
-//     log('checkAndNavigate userName ==>> $userName');
-//     log('checkAndNavigate strType ==>> $strType');
-//     log('checkAndNavigate mProfileImg :===> $mProfileImg');
+//     debugPrint('checkAndNavigate email ==>> $email');
+//     debugPrint('checkAndNavigate userName ==>> $userName');
+//     debugPrint('checkAndNavigate strType ==>> $strType');
+//     debugPrint('checkAndNavigate mProfileImg :===> $mProfileImg');
 //     if (!prDialog.isShowing()) {
 //       Utils.showProgress(context, prDialog);
 //     }
@@ -517,12 +517,12 @@
 //         Provider.of<GeneralProvider>(context, listen: false);
 //     await generalProvider.loginWithSocial(
 //         email, userName, strType, mProfileImg);
-//     log('checkAndNavigate loading ==>> ${generalProvider.loading}');
+//     debugPrint('checkAndNavigate loading ==>> ${generalProvider.loading}');
 //
 //     if (!generalProvider.loading) {
 //       if (generalProvider.loginGmailModel.status == 200) {
-//         log('loginGmailModel ==>> ${generalProvider.loginGmailModel.toString()}');
-//         log('Login Successfull!');
+//         debugPrint('loginGmailModel ==>> ${generalProvider.loginGmailModel.toString()}');
+//         debugPrint('Login Successfull!');
 //         await sharePref.save(
 //             "userid", generalProvider.loginGmailModel.result?[0].id.toString());
 //         await sharePref.save("username",
@@ -539,7 +539,7 @@
 //         // Set UserID for Next
 //         Constant.userID =
 //             generalProvider.loginGmailModel.result?[0].id.toString();
-//         log('Constant userID ==>> ${Constant.userID}');
+//         debugPrint('Constant userID ==>> ${Constant.userID}');
 //
 //         await homeProvider.setSelectedTab(0);
 //         await sectionDataProvider.getSectionBanner("0", "1");
